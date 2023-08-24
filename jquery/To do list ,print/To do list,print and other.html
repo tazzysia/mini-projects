@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>To do list</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+
+	<style type="text/css">
+
+		.stroked{
+			text-decoration: line-through;
+		}
+		fieldset{
+			
+			border: double firebrick;
+			margin: 30px 500px;
+			height: 400px;
+			
+		}
+		h2{
+			color: firebrick;
+		}
+		button{
+            
+			background-color: peachpuff;
+			border: solid firebrick;
+			border-radius: 10px;
+			padding: 5px 20px;
+			color: firebrick;
+		}
+		button:hover{
+			background-color: firebrick;
+			color: peachpuff;
+		}
+		a{
+			margin: 500px;
+		}
+		
+	</style>
+</head>
+<body><fieldset><legend>
+	<h2 >To Do List</h2></legend>
+
+	<input type="Text" name="" id="list";>
+
+	<button id="btn">ADD</button>
+
+	<ol>
+		
+	</ol>
+</fieldset>
+<a href="" class="print">Print</a>
+
+<form>
+<label>maximum 15 characters</label>
+<textarea id="textarea" maxlength="15"></textarea>
+<span id="rchars">15</span>
+Character(s)remaining
+</form>
+
+
+
+
+	<script type="text/javascript">
+		function blink(){
+		$("h2").fadeOut(500);
+		$("h2").fadeIn(500);}
+		setInterval(blink)
+		
+		
+		$(document).ready(function(){
+
+			$("#btn").click(function() {
+
+				var value=$("#list").val()
+
+				$("ol").append('<li>' + value+'</li>')
+
+			$(document).on('dblclick','li',function(){
+			$(this).toggleClass('stroked').fadeOut('slow')
+		})
+      
+		//$('li').dblclick(function(){
+		//	$(this).toggleClass('stroked').fadeOut('slow')
+		//})
+			})
+
+         $('a.print').click(function(){
+				window.print();
+			})
+
+         var maxlength=15;
+         $('textarea').keydown(function(){
+         var textlen=maxlength-$(this).val();
+         $("#chars").text(textlen)
+         })
+        
+         
+		})
+
+	</script>
+
+</body>
+</html>

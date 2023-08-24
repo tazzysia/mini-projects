@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Student register</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<style type="text/css">
+     body{
+     	background-color: papayawhip;
+     }
+     h2{
+
+     	color: darkblue;
+     	font-size: 30px;
+     	animation-name: text;
+     	animation-duration: 3s;
+      position: relative;
+      animation-iteration-count: infinite;
+     
+     }
+     @keyframes text{
+	  0%{
+	  	left: 0px;
+	  }
+	  100%{
+	  	left: 350px;
+	  }
+   }
+
+		#reg_form, #edit_form{
+			background-color: paleblue;
+			line-height: 40px;
+			font-size: 18px;
+			padding: 15px 100px;
+			border: solid cadetblue;
+			margin-top: 50px;
+			margin-right: 20px;
+			margin-left: 180px;
+         border-radius: 15px 60px 15px 60px;
+          color:  darkblue;
+         box-shadow: 1px 2px 25px blue;
+
+		}
+		#table_form{
+			color: darkblue;
+			margin: 10px 100px ;
+			margin-top: 50px;
+		}
+		#form-list{
+			display: grid;
+			grid-template-columns: auto auto ;
+		}
+		button{
+			background-color:cornflowerblue;
+			padding: 8px 10px;
+			 border-radius: 0px 10px 0px 10px;
+
+		}
+
+
+
+
+
+
+	</style>
+</head>
+<body>
+	<h2>Students Registration Form</h2>
+	<div id="form-list">
+
+<div id="reg_form">
+	<h3> Register Form</h3>
+
+	<label for="name">Name:</label><br>
+	<input type="Text" name="" id="name"><br>
+
+	<label for="age">Age:</label><br>
+	<input type="Text" name="" id="age"><br>
+
+	<label for="address">Address:</label><br>
+	<input type="Text" name="" id="address"><br>
+
+	<label for="gender">Gender:</label><br>
+
+	<label>Male:</label>
+	<input type="radio" name="gender" value="male">
+	<label>Female:</label>
+	<input type="radio" name="gender" value="female"><br><br>
+
+	<button id="register">Register</button>
+</div>
+
+<div id="edit_form">
+	<h3> Editing</h3>
+
+	<input type="hidden" name="" id="uid">
+
+	<label for="name">Name:</label><br>
+	<input type="Text" name="" id="uname"><br>
+
+	<label for="age">Age:</label><br>
+	<input type="Text" name="" id="uage"><br>
+
+	<label for="address">Address:</label><br>
+	<input type="Text" name="" id="uaddress"><br>
+
+	<label for="gender">Gender:</label><br>
+
+	<label>Male:</label>
+	<input type="radio" name="gender" value="male" id="umale">
+	<label>Female:</label>
+	<input type="radio" name="gender" value="female" id="ufemale"><br><br>
+
+	<button id="update">Update</button>
+</div>
+
+
+<div id="table_form">
+	<h3>Table</h3>
+	<table border="1" cellpadding="10" >
+		<thead>
+			<th>No</th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Address</th>
+			<th>Gender</th>
+			<th>Action</th>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+</div>
+
+</div>
+
+	
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	   showData()	
+	   $("#reg_form").show()
+	   $("#edit_form").hide()
+
+
+	$('#register').click(function(){
+
+			var name=$('#name').val()
+			var age=$('#age').val()
+			var address=$('#address').val()
+			var gender=$("input[name='gender']:checked").val()
+			// var gender=$("input[type='radio']:checked").val()
+
+
+			///object
+			var student={
+				name:name,
+				age:age,
+				address:address,
+				gender:gender
+			}
+			// 
+
+			var studentlist=localStorage.getItem('Student')
+            var studentArray;
+			if(studentlist==null){
+				studentArray=[];
+			}else{
+				studentArray=JSON.parse(studentlist)
+			}
+			studentArray.push(student) //array object
+			// console.log(studentArray)
+
+			var studentstring= JSON.stringify(studentArray) ///change JSON fomat
+
+			localStorage.setItem('Student',studentstring)
+		    showData()
+		   
+
+    })
+			function showData(){
+				var studentlist=localStorage.getItem("Student")
+              
+				// console.log(studentlist) => string
+
+				var studentArray =JSON.parse(studentlist)
+
+				// console.log(studentArray) => object
+
+				var html=""
+				var j=1
+				$.each(studentArray,function(i,v) {
+					html+=`<tr>
+                             <td>${j++}</td>
+                             <td>${v.name}</td>
+                             <td>${v.age}</td>
+                             <td>${v.address}</td>
+                             <td>${v.gender}</td>
+                             <td><button class="btn_edit" data-id="${i}">Edit</button>
+                                <button class="btn_delete" data-id="${i}">delete</button>                 </td>
+					       </tr>`
+				})
+
+				$("tbody").html(html)
+			} 
+			$(".btn_edit").click(function(){
+				  $("#reg_form").hide()
+	           $("#edit_form").show()
+				// alert("hello")
+				var id=$(this).data('id');
+				// console.log(id)
+				var studentlist=localStorage.getItem("Student")
+				var studentArray=JSON.parse(studentlist)
+
+				var editstudent=studentArray[id]
+				// console.log(editstudent)
+
+				var name=editstudent.name;
+				var age=editstudent.age;
+				var address=editstudent.address;
+				var gender=editstudent.gender;
+
+				// console.log(age)
+
+				$("#uname").val(name)
+				$("#uage").val(age)
+				$("#uaddress").val(address)
+				$("#uid").val(id)
+
+				if(gender=="male"){
+					$("#umale").attr("checked","checked")
+				}else{
+					$("#ufemale").prop("checked","checked")
+				}
+			})	
+			$("#update").click(function(){
+				var name=$("#uname").val()
+				var age=$("#uage").val()
+				var address=$("#uaddress").val()
+				var gender=$("input[name='gender']:checked").val()
+				var id=$("#uid").val()
+				// alert(gender)
+
+				var updatestudent={
+					name:name,
+					age:age,
+					address:address,
+					gender:gender
+
+				}
+				var studentlist=localStorage.getItem("Student")
+				var studentArray=JSON.parse(studentlist)
+				studentArray[id]=updatestudent
+
+				var studentstring=JSON.stringify(studentArray)
+				localStorage.setItem('Student',studentstring)
+				showData()
+			})
+			$(".btn_delete").click(function(){
+				var id=$(this).data('id');
+				var studentlist=localStorage.getItem("Student")
+				var studentArray=JSON.parse(studentlist)
+
+				studentArray.splice(id,1) /////delete data
+
+				var studentstring=JSON.stringify(studentArray)
+				localStorage.setItem("Student",studentstring)
+				showData()
+			})
+	})
+</script>
+</body>
+</html>

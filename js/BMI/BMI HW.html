@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>BMI</title>
+</head>
+<body>
+	<form name="caculator">
+<p><h3>Enter your Weight</h3></p>
+Lbs:<input type="Number" name="weight">
+
+<p><h3>Enter your Height</h3></p>
+Ft:<input type="Number" name="feet">
+In:<input type="Number" name="inches">
+
+<p><h3>Your BMI is</h3></p>
+<input type="Number" name="result">
+<button type="button" onclick="caculate()">Calculation</button>
+
+</form>
+
+
+
+
+
+<script type="text/javascript">
+	function caculate(){
+let weight=parseInt(document.caculator.weight.value)
+let feet=parseInt(document.caculator.feet.value)
+let inches=parseInt(document.caculator.inches.value)
+let totalheight=(feet*12)+inches
+
+let result=weight/totalheight**2 *703;
+let bmiresult=result.toFixed(2);
+document.caculator.result.value=bmiresult;
+
+if(bmiresult<18.5){
+	alert('You are Underweight.')
+	}
+	else if(bmiresult>18.5 && bmiresult<24.9){
+		alert("You are Healthy.")
+	}
+	else if(bmiresult>25.0 && bmiresult<29.9){
+		alert("You are Overweight.")
+	}
+	else{
+		alert("You are Obese.")
+	}
+}
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exam Result Converter</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+</head>
+<body>
+
+<div>
+	<label>Myanmar:</label><br>
+	<input type="Number" name="" id="myan"><br>
+
+	<label>English:</label><br>
+	<input type="Number" name="" id="eng"><br>
+
+	<label>Mathematics:</label><br>
+	<input type="Number" name="" id="math"><br>
+
+	<button id="btn">Result</button>
+    
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+     
+    $("#btn").click(function() {
+    	var myan=$("#myan").val()
+    	var eng=$("#eng").val()
+    	var math=$("#math").val()
+
+    	if (myan<=40 || eng<=40 || math<=40) {
+    		alert("You are Fail.")
+    	}else if(myan>=80 && eng>=80 && math>=80){
+    		alert("You are pass with Flying colors in all subjects.")
+    	}else if(myan>=80 && eng>=80 && math>=40){
+    		alert("You are pass with Flying colors in MYANMAR and ENGLISH.")
+    	}else if(myan>=40 && eng>=80 && math>=80 ){
+    		alert("You are pass with Flying colors in ENGLISH and MATHEMATICS.")
+    	}else if(myan>=80 && eng>=40 && math>=80 ){
+    		alert("You are pass with Flying colors in MYANMAR and MATHEMATICS.")
+    	}
+    	else if(myan>=80){
+    		alert("You are pass with Flying colors in MYANMAR.")
+    	}else if(eng>=80){
+    		alert("You are pass with Flying colors in ENGLISH.")
+    	}else if(math>=80){
+    		alert("You are pass with Flying colors in MYATHEMATICS.")
+    	}
+    	else {
+    		alert("You are Pass.")
+    	}
+
+
+
+    })
+  
+
+
+
+
+	})
+</script>
+</body>
+</html>

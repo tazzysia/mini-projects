@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>H.W</title>
+<style type="text/css">
+  form{
+  	background-color: yellow;
+  	border: solid firebrick;
+  	margin: 30px 340px;
+  	padding: 20px ;
+  	border-radius: 40px 0px;
+  }
+  button{
+  	padding: 10px 10px;
+  	background-color: lightcoral;
+  }
+  tr{
+  	line-height: 50px;
+  }
+  .result{
+  	padding: 10px 10px;
+  }
+	
+</style>
+</head>
+<body>
+	<form name="myform">
+	<table align="center">
+	<tr>
+		<td><label><b>Number1:</b></label>
+		<input type="Number" name="num1"></td>
+		<td><label><b>Number2:</b></label>
+		<input type="Number" name="num2"></td>
+	</tr>
+	<tr>
+		<td><label><b>Number3:</b></label>
+		<input type="Number" name="num3"></td>
+		<td><label><b>Number4:</b></label>
+		<input type="Number" name="num4"></td>
+    </tr>
+    <tr>
+        <td align="center" ><input type="Number" name="result" readonly="" placeholder="Results"></td>
+		<td align="center"><button type="button"onclick="sum()">caculation</button></td>
+	</tr>
+    </table>
+	</form>
+
+
+<script type="text/javascript">
+
+	function sum(){
+	let num1= parseInt (document.myform.num1.value)
+    let num2= parseInt(document.myform.num2.value)
+    let num3= parseInt (document.myform.num3.value)
+    let num4= parseInt(document.myform.num4.value)
+
+    let sum=num1+num2+num3+num4
+    document.myform.result.value = sum
+}
+</script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+  <link rel="stylesheet" type="text/css" href="H.W .css">
+</head>
+<body>
+	<form><table>
+	<tr>
+		<td colspan="3"><input type="text" name="result"></td>
+		<td><input type="button" value="C"></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="1" onclick="1"></td>
+		<td><input type="button" value="2"></td>
+		<td><input type="button" value="3"></td>
+		<td><input type="button" value="+"></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="4"></td>
+		<td><input type="button" value="5"></td>
+		<td><input type="button" value="6"></td>
+		<td><input type="button" value="-"></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="7"></td>
+		<td><input type="button" value="8"></td>
+		<td><input type="button" value="9"></td>
+		<td><input type="button" value="*"></td>
+	</tr>
+	<tr>
+		<td><input type="button" value="0"></td>
+		<td><input type="button" value="."></td>
+		<td><input type="button" value="/"></td>
+		<td><input type="button" value="="></td>
+	</tr>
+
+</table>
+	</form>
+
+</body>
+</html> -->
